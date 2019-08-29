@@ -1,0 +1,85 @@
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row"
+        *ngIf="!confirmation"
+      >
+        <div class="col-md-4 mx-auto">
+
+          <h1 class="h3 mb-3 font-weight-normal text-center">Your Wishlist</h1>
+          <!-- form card login -->
+          <div class="card rounded-2">
+            <div class="card-header">
+              <h3 class="mb-0">Register</h3>
+            </div>
+            <div class="card-body">
+              <form class="form-signin" autocomplete="off" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <input
+                    type="text" id="firstName" name="firstName" class="form-control rounded-2" autofocus="autofocus" placeholder="first name" required
+                    [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+                    formControlName="firstName"
+                  >
+                  <div *ngIf="f.firstName.errors" class="invalid-feedback">
+                    <p *ngIf="f.firstName.errors.required">First name is required.</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input
+                    type="text" id="lastName" name="lastName" class="form-control rounded-2" placeholder="last name" required
+                    [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+                    formControlName="lastName"
+                  >
+                  <div *ngIf="f.lastName.errors" class="invalid-feedback">
+                    <p *ngIf="f.lastName.errors.required">Username is required.</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input
+                    type="email" id="email" name="email" class="form-control rounded-2" placeholder="email" required
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                    formControlName="email"
+                  >
+                  <div *ngIf="f.email.errors" class="invalid-feedback">
+                    <p *ngIf="f.email.errors.required">Email is required.</p>
+                    <p *ngIf="f.email.errors.email">Email has to have correct form.</p>
+                    <p *ngIf="f.email.errors.exist">This email already used.</p>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input
+                    type="password" id="password" name="password" class="form-control rounded-2" placeholder="password" required
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                    formControlName="password"
+                  >
+                  <div *ngIf="f.password.errors" class="invalid-feedback">
+                    <p *ngIf="f.password.errors.required">Password is required.</p>
+                  </div>
+                </div>
+                <a href="#" class="login-action" title="login" routerLink="/login">
+                  <p>Have an account?</p>
+                </a>
+                <div class="text-right">
+                  <button type="submit" class="btn btn-primary" id="btnLogin">Register</button>
+                </div>
+                <p class="text-muted text-center mt-2 mb-0">&copy; 2019</p>
+              </form>
+            </div>
+            <!--/card-block-->
+          </div>
+          <!-- /form card login -->
+
+        </div>
+      </div>
+      <div class="row"
+        *ngIf="confirmation"
+      >
+        <div class="text-center">
+          <h3 class="text-center">Register successful. Check your mailbox and confirm email please.</h3>
+          <h3 class="text-center">You will be redirected to login page.</h3>
+          <img class="text-center" src="../../assets/pictures/stick.jpg">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

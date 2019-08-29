@@ -1,0 +1,26 @@
+<div *ngIf="!subscribed">
+  <form
+    [formGroup]="subscribeNewsForm"
+    (ngSubmit)="subscribeEmail()"
+  >
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        id="email"
+        class="form-control"
+        type="email"
+        placeholder="Input your email"
+        formControlName="email"
+      >
+    </div>
+    <button
+      class="btn btn-primary float-right"
+      type="submit"
+    >
+      Subscribe
+    </button>
+  </form>
+</div>
+<div *ngIf="subscribed">
+  <h2>Thank you for your subscribition</h2>
+</div>
