@@ -23,7 +23,6 @@ export class RegisterComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('register');
     this.config.isAuthPage = true;
     this.registerForm = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
@@ -41,7 +40,6 @@ export class RegisterComponent implements OnInit {
     }
 
     this.userService.register(this.registerForm.value)
-                    .pipe(first())
                     .subscribe(
                       data => {
                         if (data.status == 'OK') {

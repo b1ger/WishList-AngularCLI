@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from "rxjs";
 import { Router } from "@angular/router";
+import { User} from "../_models/user";
+import { BaseResponse } from "../_models/base.response";
+import { Global } from "../_config/global";
 
 @Injectable()
 export class AuthService {
@@ -10,10 +13,18 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private config: Global
   ) {}
 
-  login() {}
+  login(user: User) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<BaseResponse>(this.config.apiUrl + "/user/login", user, options);
+  }
 
   logout() {
     this.isLoggedIn.next(false);

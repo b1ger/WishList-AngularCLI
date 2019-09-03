@@ -14,37 +14,25 @@
               </button>
             </div>
             <div class="card-body">
-              <form class="form-signin" autocomplete="off">
+              <form class="form-signin" autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="form-group">
                   <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    class="form-control rounded-2"
-                    autofocus="autofocus"
-                    placeholder="email"
-                    required>
+                    type="text" id="email" name="email" class="form-control rounded-2" autofocus="autofocus" placeholder="email" required
+                    formControlName="email"
+                    [ngClass]="{ 'is-invalid': isSubmitted && f.email.errors }"
+                  >
                 </div>
                 <div class="form-group">
                   <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    class="form-control rounded-2"
-                    placeholder="password"
-                    required>
+                    type="password" id="password" name="password" class="form-control rounded-2" placeholder="password" required
+                    formControlName="password"
+                    [ngClass]="{ 'is-invalid': isSubmitted && f.password.errors }"
+                  >
                 </div>
-                <div
-                  class="alert alert-danger"
-                  *ngIf="false"
+                <div class="text-danger"
+                  *ngIf="isSubmitted && (f.email.errors || f.password.errors)"
                 >
-                  Invalid email or password.
-                </div>
-                <div
-                  class="alert alert-success"
-                  *ngIf="false"
-                >
-                  You have been logged out.
+                  <p>Invalid email or password.</p>
                 </div>
                 <div class="form-group">
                   <input class="custom-checkbox" type="checkbox">
