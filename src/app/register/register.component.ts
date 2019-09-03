@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { UserService } from "../user/user.service";
 import { first } from "rxjs/operators";
+import { Global } from "../_config/global";
 
 @Component({
   selector: 'app-register',
@@ -17,10 +18,13 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private config: Global
   ) {}
 
   ngOnInit(): void {
+    console.log('register');
+    this.config.isAuthPage = true;
     this.registerForm = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
@@ -42,9 +46,11 @@ export class RegisterComponent implements OnInit {
                       data => {
                         if (data.status == 'OK') {
                           this.confirmation = true;
+                          this.submitted = false;
                           setTimeout( () => {
                             this.router.navigate(['/login']);
                           }, 5000 );
+                          this.config.isAuthPage = false;
                         } else {
                           this.f.email.setErrors({'exist': true})
                         }
@@ -56,4 +62,8 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
+  close() {
+    this.config.isAuthPage = false;
+    this.router.navigate(["/"]);
+  }
 }
