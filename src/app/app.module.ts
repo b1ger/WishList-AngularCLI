@@ -12,13 +12,16 @@ import { CookieService } from 'ngx-cookie-service';
 import { HeaderComponent } from "./header/header.component";
 import { RegisterComponent } from "./register/register.component";
 import { Global } from "./_config/global";
-import {UserService} from "./user/user.service";
+import { UserService } from "./user/user.service";
+import { IndexComponent } from "./index/index.component";
+import { ListModule } from "./list/list.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     HeaderComponent,
+    IndexComponent,
     RegisterComponent
   ],
   imports: [
@@ -26,6 +29,7 @@ import {UserService} from "./user/user.service";
     BrowserModule,
     EmailModule,
     FormsModule,
+    ListModule,
     ReactiveFormsModule,
     RouterModule
   ],
