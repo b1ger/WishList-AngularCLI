@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './auth.service';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from './auth.service';
 import { Global } from "../_config/global";
+import {first} from "rxjs/operators";
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,9 @@ import { Global } from "../_config/global";
 })
 export class AuthComponent implements OnInit {
 
-  credentials: {username: 'user', password: 'password'};
+  private loginForm: FormGroup;
+
+  isSubmitted: boolean = false;
 
   constructor(
     private loginService: AuthService,
@@ -20,11 +24,33 @@ export class AuthComponent implements OnInit {
   ) {}
 
   login() {
-    this.config.isAuthPage = false;
+    this.isSubmitted = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
+    this.loginService.login(this.loginForm.value)
+                     .subscribe(
+                       data => {
+                         console.log(data);
+                         if (data.status == 'OK') {
+                           localStorage.setItem('user', JSON.stringify(data.results));
+                           this.config.isAuthPage = false;
+                           this.config.loggedIn = true;
+                           this.router.navigate(['/']);
+                         } else {
+                           this.f.email.setErrors({'error': true});
+                           this.f.password.setErrors({'error': true});
+                         }
+                       }
+                     );
   }
 
   ngOnInit(): void {
     this.config.isAuthPage = true;
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.email, Validators.required]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)])
+    })
   }
 
   close() {
@@ -35,5 +61,9 @@ export class AuthComponent implements OnInit {
   toCreateAction() {
     this.config.isStartPage = false;
     this.router.navigate(['/list/new'])
+  }
+
+  get f() {
+    return this.loginForm.controls;
   }
 }
