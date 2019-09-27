@@ -5,14 +5,8 @@ import { Router } from "@angular/router";
   selector: 'app-index',
   templateUrl: './index.component.html'
 })
-export class IndexComponent implements OnInit {
+export class IndexComponent {
 
   constructor(private router: Router) {}
-
-  ngOnInit(): void {
-    console.log(localStorage.getItem('user') != null);
-  }
-
-
 
 }
