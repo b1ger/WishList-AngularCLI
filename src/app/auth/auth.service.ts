@@ -28,6 +28,8 @@ export class AuthService {
 
   logout() {
     this.isLoggedIn.next(false);
+    localStorage.removeItem('user');
+    this.config.loggedIn = false;
     this.router.navigate(['/']);
   }
 }

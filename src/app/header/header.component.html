@@ -24,7 +24,12 @@
     <div
       *ngIf="config.loggedIn"
     >
-
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button">{{ this.config.user.firstName }}</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-item" (click)="onLogout()">Logout</div>
+          </div>
+        </div>
     </div>
   </div>
 </nav>
