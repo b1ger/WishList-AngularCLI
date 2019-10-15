@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {User} from "../_models/user";
+import { Injectable } from "@angular/core";
+import { User } from "../_models/user";
 
 @Injectable()
 export class Global {
@@ -8,7 +8,6 @@ export class Global {
   isStartPage: boolean = false;
   loggedIn: boolean = localStorage.getItem('user') != null;
   user: User = localStorage.getItem('user') ? this.getUser() : null;
-  authHeader: string = localStorage.getItem('user') ? this.getAuthHeader() : '';
 
   getUser(): User {
     let object = JSON.parse(localStorage.getItem('user'));
@@ -25,7 +24,8 @@ export class Global {
     this.user = this.getUser();
   }
 
-  getAuthHeader(): string {
-    return 'Basic ' + btoa(this.user.email + ':' + '111111')
+  // TODO
+  getBearerToken() {
+
   }
 }

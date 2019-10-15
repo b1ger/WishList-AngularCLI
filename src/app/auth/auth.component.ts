@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { Global } from "../_config/global";
+import { CookieService } from "ngx-cookie-service";
+import { UserService } from "../user/user.service";
 
 @Component({
   selector: 'app-login',
@@ -17,30 +19,40 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private loginService: AuthService,
+    private userService: UserService,
     private http: HttpClient,
     private router: Router,
-    private config: Global
+    private config: Global,
+    private cookieService: CookieService
   ) {}
 
   login() {
     if (this.loginForm.invalid) {
       return;
     }
-    this.loginService.login(this.loginForm.value)
-                     .subscribe(
-                       data => {
-                         if (data.status == 'OK') {
-                           localStorage.setItem('user', JSON.stringify(data.results));
-                           this.config.isAuthPage = false;
-                           this.config.loggedIn = true;
-                           this.authError = false;
-                           this.config.setUser();
-                           this.router.navigate(['/']);
-                         } else {
-                           this.authError = true;
-                         }
-                       }
-                     );
+    this.loginService.login(this.loginForm.value).subscribe(
+      resp => {
+        if (resp.status == "OK") {
+          this.config.loggedIn = true;
+          this.cookieService.set("jwtBearerToken", resp.jwttoken);
+          this.userService.getUser(this.loginForm.value).subscribe(
+            resp => {
+              console.log(resp);
+              if (resp.status == 'OK') {
+                localStorage.setItem('user', JSON.stringify(resp.results));
+                this.config.loggedIn = true;
+                this.config.isAuthPage = false;
+                this.config.setUser();
+                this.router.navigate(['/']);
+              }
+            }
+          );
+          this.authError = false;
+        } else {
+          this.authError = true;
+        }
+      }
+    );
   }
 
   ngOnInit(): void {
