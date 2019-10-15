@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 import { Router } from "@angular/router";
-import { User} from "../_models/user";
-import { BaseResponse } from "../_models/base.response";
+import { User } from "../_models/user";
+import { JwtResponse } from "../_models/jwt.response";
 import { Global } from "../_config/global";
 
 @Injectable()
@@ -17,13 +17,17 @@ export class AuthService {
     private config: Global
   ) {}
 
-  login(user: User) {
+  login(user: User): Observable<JwtResponse> {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<BaseResponse>(this.config.apiUrl + "/user/login", user, options);
+    let data = {
+      'username': user.email,
+      'password': user.password
+    };
+    return this.http.post<JwtResponse>("http://localhost:8080/authenticate", data, options);
   }
 
   logout() {

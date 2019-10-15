@@ -19,14 +19,14 @@
                   <input
                     type="text" id="email" name="email" class="form-control rounded-2" autofocus="autofocus" placeholder="email" required
                     formControlName="email"
-                    [ngClass]="{ 'is-invalid': f.email.invalid && (f.email.dirty || f.email.touched) }"
+                    [ngClass]="{ 'is-invalid': (f.email.invalid && (f.email.dirty || f.email.touched)) || this.authError }"
                   >
                 </div>
                 <div class="form-group">
                   <input
                     type="password" id="password" name="password" class="form-control rounded-2" placeholder="password" required
                     formControlName="password"
-                    [ngClass]="{ 'is-invalid': f.password.invalid && (f.password.dirty || f.password.touched) }"
+                    [ngClass]="{ 'is-invalid': (f.password.invalid && (f.password.dirty || f.password.touched)) || this.authError }"
                   >
                 </div>
                 <div class="text-danger"
