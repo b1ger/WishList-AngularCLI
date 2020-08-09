@@ -1,8 +1,8 @@
-import {Component, Injectable, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {EmailService} from './email.service';
-import {Router} from '@angular/router';
-import {CookieService} from "ngx-cookie-service";
+import { Component, Injectable, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { EmailService } from './email.service';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',

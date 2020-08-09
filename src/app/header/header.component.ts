@@ -1,13 +1,13 @@
-import {Component, OnInit} from "@angular/core";
-import {Observable} from "rxjs";
-import {AuthService} from "../auth/auth.service";
-import {Global} from "../_config/global";
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from '../auth/auth.service';
+import { Global } from '../_config/global';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit{
+export class HeaderComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean>;
 
@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit{
   }
 
   onLogout() {
-    this.authService.logout()
+    this.authService.logout();
   }
 
 }

@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
+import {Component} from '@angular/core';
 
 @Component({
-  selector: 'list-create',
+  selector: 'app-list-create',
   templateUrl: './create.list.component.html'
 })
 export class CreateListComponent {}

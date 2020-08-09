@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import { EmailComponent } from "./email/email.component";
-import { CookieService } from "ngx-cookie-service";
-import {Global} from "./_config/global";
+import { Component, OnInit } from '@angular/core';
+import { EmailComponent } from './email/email.component';
+import { CookieService } from 'ngx-cookie-service';
+import { Global } from './_config/global';
 
 @Component({
   selector: 'app-root',

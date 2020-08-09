@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from "rxjs";
-import { Router } from "@angular/router";
-import { User } from "../_models/user";
-import { JwtResponse } from "../_models/jwt.response";
-import { Global } from "../_config/global";
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { User } from '../_models/user';
+import { JwtResponse } from '../_models/jwt.response';
+import { Global } from '../_config/global';
 
 @Injectable()
 export class AuthService {
@@ -23,11 +23,11 @@ export class AuthService {
         'Content-Type': 'application/json'
       })
     };
-    let data = {
-      'username': user.email,
-      'password': user.password
+    const data = {
+      username: user.email,
+      password: user.password
     };
-    return this.http.post<JwtResponse>("http://localhost:8080/authenticate", data, options);
+    return this.http.post<JwtResponse>('http://localhost:8080/authenticate', data, options);
   }
 
   logout() {

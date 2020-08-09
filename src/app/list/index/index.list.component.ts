@@ -1,6 +1,7 @@
-import {Component} from "@angular/core";
+import { Component } from '@angular/core';
 
-@Component({})
-export class IndexListComponent {
-
-}
+@Component({
+  selector: 'app-list-create',
+  templateUrl: './index.list.component.html'
+})
+export class IndexListComponent {}

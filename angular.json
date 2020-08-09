@@ -136,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "WishList-AngularCLI"
+  "defaultProject": "WishList-AngularCLI",
+  "cli": {
+    "analytics": false
+  }
 }

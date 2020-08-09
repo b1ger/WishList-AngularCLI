@@ -1,16 +1,20 @@
-import { NgModule } from "@angular/core";
-import { CreateListComponent } from "./create/create.list.component";
+import { NgModule } from '@angular/core';
+import { CreateListComponent } from './create/create.list.component';
+import { IndexListComponent}  from './index/index.list.component';
 
 @NgModule({
   declarations: [
-    CreateListComponent
+    CreateListComponent,
+    IndexListComponent
   ],
   imports: [],
   exports: [
-    CreateListComponent
+    CreateListComponent,
+    IndexListComponent
   ],
   bootstrap: [
-    CreateListComponent
+    CreateListComponent,
+    IndexListComponent
   ],
   providers: []
 })

@@ -5,7 +5,7 @@ import { Email } from '../_models/email';
 @Injectable()
 export class EmailService {
 
-  private url: string = 'http://localhost:8080/apiwl';
+  private url = 'http://localhost:8080/apiwl';
 
   constructor(private emailRestService: HttpClient) {}
 
