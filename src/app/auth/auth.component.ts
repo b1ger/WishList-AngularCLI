@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { Global } from "../_config/global";
 import { CookieService } from "ngx-cookie-service";
 import { UserService } from "../user/user.service";
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from "angularx-social-login";
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,16 @@ import { UserService } from "../user/user.service";
 })
 export class AuthComponent implements OnInit {
 
-  private loginForm: FormGroup;
+  loginForm: FormGroup;
+  socialUser: SocialUser;
+  loggedIn: boolean;
 
   authError: boolean = false;
 
   constructor(
     private loginService: AuthService,
     private userService: UserService,
+    private authService: SocialAuthService,
     private http: HttpClient,
     private router: Router,
     private config: Global,
@@ -61,6 +65,11 @@ export class AuthComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)])
     })
+    this.authService.authState.subscribe((user) => {
+      this.socialUser = user;
+      this.loggedIn = (user != null);
+      console.log(this.socialUser)
+    });
   }
 
   close() {
@@ -75,5 +84,17 @@ export class AuthComponent implements OnInit {
 
   get f() {
     return this.loginForm.controls;
+  }
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  signInWithFB(): void {
+    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+  }
+
+  signOutSocial(): void {
+    this.authService.signOut();
   }
 }

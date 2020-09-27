@@ -36,10 +36,11 @@
                 </div>
                 <div class="form-group">
                   <input class="custom-checkbox" type="checkbox">
-                  <span class="custom-control-description small text-dark">Remember me</span>
+                  <span class="custom-control-description small text-dark"> Remember me</span>
                 </div>
-                <div class="col text-right">
-                  <button type="submit" class="btn btn-primary mb-2" id="btnLogin">Login</button>
+                <div class="mb-3">
+                  <button type="submit" class="btn btn-outline-info btn-sm btn-block" id="btnFb" (click)="signInWithFB()">Sign up with Facebook</button>
+                  <button type="submit" class="btn btn-outline-primary btn-sm btn-block" id="btnLogin">Login</button>
                 </div>
                 <a href="#" class="login-action" title="Forgot password">
                   <p>Forgot your password?</p>
@@ -53,6 +54,12 @@
             <!--/card-block-->
           </div>
           <!-- /form card login -->
+          <img *ngIf="socialUser.photoUrl" class="card-img-top img-responsive photo" src="{{ socialUser.photoUrl }}">
+          <div class="card-block">
+            <h4 class="card-title">{{ socialUser.name }}</h4>
+            <p class="card-text">{{ socialUser.email }}</p>
+            <p class="card-text">Logged in with {{ socialUser.provider }}</p>
+          </div>
 
         </div>
       </div>
