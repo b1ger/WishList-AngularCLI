@@ -1,6 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import {
+  SocialLoginModule,
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialAuthServiceConfig,
+} from 'angularx-social-login';
 
 import { AppComponent } from './app.component';
 import { AuthComponent} from './auth/auth.component';
@@ -31,9 +37,39 @@ import { ListModule } from './list/list.module';
     FormsModule,
     ListModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    SocialLoginModule
   ],
-  providers: [ AuthService, CookieService, Global, UserService ],
+  providers: [
+    AuthService,
+    CookieService,
+    Global,
+    UserService,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          // {
+          //   id: GoogleLoginProvider.PROVIDER_ID,
+          //   provider: new GoogleLoginProvider(
+          //     'clientId'
+          //   ),
+          // },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('590300855088731'),
+          }
+          // {
+          //   id: AmazonLoginProvider.PROVIDER_ID,
+          //   provider: new AmazonLoginProvider(
+          //     'clientId'
+          //   ),
+          // },
+        ],
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

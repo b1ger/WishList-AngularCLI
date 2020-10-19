@@ -36,10 +36,11 @@
                 </div>
                 <div class="form-group">
                   <input class="custom-checkbox" type="checkbox">
-                  <span class="custom-control-description small text-dark">Remember me</span>
+                  <span class="custom-control-description small text-dark"> Remember me</span>
                 </div>
-                <div class="col text-right">
-                  <button type="submit" class="btn btn-primary mb-2" id="btnLogin">Login</button>
+                <div class="mb-3">
+                  <button type="submit" class="btn btn-outline-info btn-sm btn-block" id="btnFb" (click)="signInWithFB()">Sign up with Facebook</button>
+                  <button type="submit" class="btn btn-outline-primary btn-sm btn-block" id="btnLogin">Login</button>
                 </div>
                 <a href="#" class="login-action" title="Forgot password">
                   <p>Forgot your password?</p>
