@@ -65,11 +65,6 @@ export class AuthComponent implements OnInit {
       email: new FormControl('', [Validators.email, Validators.required]),
       password: new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(15)])
     })
-    this.authService.authState.subscribe((user) => {
-      this.socialUser = user;
-      this.loggedIn = (user != null);
-      console.log(this.socialUser)
-    });
   }
 
   close() {
@@ -92,6 +87,14 @@ export class AuthComponent implements OnInit {
 
   signInWithFB(): void {
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
+    this.authService.authState.subscribe((user) => {
+      this.socialUser = user;
+    });
+    this.userService.signInSocial(this.socialUser).subscribe(
+      resp => {
+        console.log(resp);
+      }
+    );
   }
 
   signOutSocial(): void {

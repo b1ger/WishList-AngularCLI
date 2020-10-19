@@ -5,9 +5,16 @@ import { Global } from "../_config/global";
 import { BaseResponse } from "../_models/base.response";
 import { CookieService } from "ngx-cookie-service";
 import { Observable } from "rxjs";
+import { SocialUser } from "angularx-social-login";
 
 @Injectable()
 export class UserService {
+
+  options = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
   constructor(
     private http: HttpClient,
@@ -16,12 +23,7 @@ export class UserService {
   ) {}
 
   register(user: User) {
-    const options = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    return this.http.post<BaseResponse>(this.config.apiUrl + "/user/register", user, options);
+    return this.http.post<BaseResponse>(this.config.apiUrl + "/user/register", user, this.options);
   }
 
   getUser(user: User): Observable<BaseResponse> {
@@ -35,5 +37,9 @@ export class UserService {
       })
     };
     return this.http.post<BaseResponse>(this.config.apiUrl + "/user/get", user, options);
+  }
+
+  signInSocial(socialUser: SocialUser) {
+    return this.http.post<BaseResponse>("http://localhost:8080/signin/social", socialUser, this.options)
   }
 }
